@@ -1,0 +1,11 @@
+# Build output
+/debugproxy
+/dist/
+
+# Local runtime data (SQLite database and body files)
+/data/
+
+# Editor and OS noise
+.DS_Store
+.idea/
+.vscode/

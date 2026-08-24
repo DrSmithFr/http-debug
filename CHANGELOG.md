@@ -9,6 +9,8 @@ messages; see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-08-24
+
 ### Added
 
 - HTTP proxy relaying to a configurable target and capturing every exchange, with
@@ -36,4 +38,5 @@ messages; see [`CONTRIBUTING.md`](CONTRIBUTING.md).
 - Multi-architecture Docker image on a distroless static base, and a
   `docker-compose.yml` example.
 
-[Unreleased]: https://github.com/DrSmithFr/http-debug/commits/main
+[Unreleased]: https://github.com/DrSmithFr/http-debug/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/DrSmithFr/http-debug/releases/tag/v0.1.0

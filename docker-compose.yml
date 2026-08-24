@@ -1,0 +1,33 @@
+# Example setup: the debug proxy sits in front of an Ollama service and both
+# share a network. Point your client at the proxy port instead of the target
+# and open the web interface to inspect the traffic.
+services:
+  debugproxy:
+    image: ghcr.io/drsmithfr/http-debug:latest
+    # build: .            # uncomment to build from a checkout instead
+    environment:
+      # The only required variable.
+      TARGET_URL: http://ollama:11434
+      # Base URL used to build the X-Debug-Url response header, so the link
+      # points at the interface as reachable from your machine.
+      PUBLIC_URL: http://localhost:8081
+      MAX_ENTRIES: "1000"
+      MAX_INLINE_BODY_SIZE: "1048576"
+      PENDING_TIMEOUT: 5m
+    ports:
+      - "8080:8080" # proxy: send your traffic here
+      - "8081:8081" # web interface
+    volumes:
+      # Optional: keeps the history across restarts.
+      - debugproxy-data:/data
+    restart: unless-stopped
+
+  ollama:
+    image: ollama/ollama:latest
+    volumes:
+      - ollama-data:/root/.ollama
+    restart: unless-stopped
+
+volumes:
+  debugproxy-data:
+  ollama-data:

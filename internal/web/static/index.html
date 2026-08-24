@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HTTP Debug Proxy</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>&#128225;</text></svg>">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <span class="logo" aria-hidden="true">&#9678;</span>
+    <h1>HTTP Debug Proxy</h1>
+  </div>
+  <div class="target" id="target" title="Proxy target"></div>
+  <div class="topbar-actions">
+    <span id="connection" class="pill pill-muted" title="Event stream status">connecting</span>
+    <button id="compose" class="btn" type="button">New request</button>
+    <button id="clear" class="btn btn-danger" type="button">Clear history</button>
+  </div>
+</header>
+
+<main class="layout" id="layout">
+  <section class="list-pane" aria-label="Captured requests">
+    <div class="filter-bar">
+      <input id="filter" type="search" placeholder="Filter by method, path or status" autocomplete="off">
+      <span id="count" class="count"></span>
+    </div>
+    <ul id="list" class="list"></ul>
+    <p id="list-empty" class="empty">
+      No requests captured yet. Send traffic through the proxy and it will appear here.
+    </p>
+  </section>
+
+  <div class="resizer" id="resizer" role="separator" aria-orientation="vertical"
+       aria-label="Resize the request list" tabindex="0"
+       title="Drag to resize — double-click to reset"></div>
+
+  <section class="detail-pane" id="detail-pane" hidden aria-label="Request detail">
+    <div id="detail"></div>
+  </section>
+</main>
+
+<template id="tpl-detail">
+  <div class="detail">
+    <div class="detail-head">
+      <div class="detail-title">
+        <span class="method" data-slot="method"></span>
+        <span class="status" data-slot="status"></span>
+        <button class="icon-btn" data-action="close" type="button" title="Close">&times;</button>
+      </div>
+      <div class="detail-url">
+        <code data-slot="url"></code>
+        <button class="copy" data-copy-slot="url" type="button" title="Copy URL">copy</button>
+      </div>
+      <div class="metrics" data-slot="metrics"></div>
+      <div class="detail-actions">
+        <button class="btn btn-small" data-action="curl" type="button">Copy as curl</button>
+        <button class="btn btn-small" data-action="edit" type="button">Edit &amp; send</button>
+        <a class="btn btn-small" data-slot="permalink" href="#">Permalink</a>
+      </div>
+    </div>
+    <nav class="tabs" data-slot="tabs"></nav>
+    <div class="tab-body" data-slot="body"></div>
+  </div>
+</template>
+
+<script src="/app.js"></script>
+</body>
+</html>

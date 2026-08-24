@@ -841,7 +841,7 @@
     }
     if (functions.length) {
       container.appendChild(section("Tools", plural(functions.length, "tool"),
-        functions.map(toolNode), functions.length <= 12));
+        functions.map(toolNode), true));
     }
     if (payload.options && typeof payload.options === "object") {
       container.appendChild(section("Options", plural(Object.keys(payload.options).length, "key"),
